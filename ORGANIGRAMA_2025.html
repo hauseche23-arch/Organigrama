@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organigrama Institucional Educativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .org-box {
+            transition: all 0.3s ease;
+        }
+        .org-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .connection-line {
+            position: absolute;
+            background-color: #374151;
+            z-index: 1;
+        }
+        .dotted-line {
+            background: repeating-linear-gradient(
+                to right,
+                #374151,
+                #374151 5px,
+                transparent 5px,
+                transparent 10px
+            );
+        }
+        .org-container {
+            position: relative;
+            min-height: 100vh;
+        }
+        .level-1 { z-index: 10; }
+        .level-2 { z-index: 9; }
+        .level-3 { z-index: 8; }
+        .collegiate { z-index: 7; }
+        
+        @media print {
+            body { print-color-adjust: exact; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-4">
+    <div class="container mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8 no-print">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Organigrama Institucional Educativo</h1>
+            <p class="text-lg text-gray-600">Estructura Organizacional según Decreto 1075 de 2015</p>
+            <div class="mt-4 flex justify-center gap-4">
+                <button onclick="toggleView('hierarchical')" class="btn btn-primary">Vista Jerárquica</button>
+                <button onclick="toggleView('functional')" class="btn btn-secondary">Vista Funcional</button>
+                <button onclick="window.print()" class="btn btn-accent">Imprimir</button>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="mb-6 bg-white p-4 rounded-lg shadow no-print">
+            <h3 class="font-bold mb-2">Leyenda:</h3>
+            <div class="flex flex-wrap gap-4 text-sm">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-1 bg-gray-700"></div>
+                    <span>Dependencia Jerárquica</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-1 bg-gray-700 dotted-line"></div>
+                    <span>Relación Funcional/Consultiva</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-blue-100 border-2 border-blue-500 rounded"></div>
+                    <span>Nivel Directivo</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-green-100 border-2 border-green-500 rounded"></div>
+                    <span>Coordinaciones</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-yellow-100 border-2 border-yellow-500 rounded"></div>
+                    <span>Órganos Colegiados</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organigrama -->
+        <div class="org-container bg-white rounded-lg shadow-lg p-8 overflow-x-auto" style="min-width: 1200px;">
+            
+            <!-- NIVEL 1: RECTORÍA -->
+            <div class="level-1 flex justify-center mb-12">
+                <div class="org-box bg-blue-100 border-4 border-blue-500 rounded-lg p-6 text-center shadow-lg max-w-xs">
+                    <h2 class="font-bold text-xl text-blue-800 mb-2">RECTOR(A)</h2>
+                    <p class="text-sm text-blue-700">Dirección Institucional</p>
+                    <p class="text-xs text-blue-600 mt-1">Lidera PEI, preside órganos colegiados</p>
+                </div>
+            </div>
+
+            <!-- Líneas de conexión desde Rectoría -->
+            <div class="connection-line" style="top: 140px; left: 50%; width: 2px; height: 40px; transform: translateX(-50%);"></div>
+            <div class="connection-line" style="top: 180px; left: 20%; width: 60%; height: 2px;"></div>
+
+            <!-- NIVEL 2: COORDINACIONES PRINCIPALES -->
+            <div class="level-2 grid grid-cols-5 gap-4 mb-12">
+                <!-- Secretaría Académica -->
+                <div class="org-box bg-green-100 border-3 border-green-500 rounded-lg p-4 text-center shadow">
+                    <h3 class="font-bold text-green-800 mb-2">SECRETARÍA ACADÉMICA</h3>
+                    <p class="text-xs text-green-700">Registro académico, SIMAT, archivo</p>
+                </div>
+
+                <!-- Coordinación Académica -->
+                <div class="org-box bg-green-100 border-3 border-green-500 rounded-lg p-4 text-center shadow">
+                    <h3 class="font-bold text-green-800 mb-2">COORDINACIÓN ACADÉMICA</h3>
+                    <p class="text-xs text-green-700">Dirección pedagógica, currículo, SIEE</p>
+                </div>
+
+                <!-- Coordinación Administrativa -->
+                <div class="org-box bg-green-100 border-3 border-green-500 rounded-lg p-4 text-center shadow">
+                    <h3 class="font-bold text-green-800 mb-2">COORDINACIÓN ADMINISTRATIVA</h3>
+                    <p class="text-xs text-green-700">Gestión FSE, compras, infraestructura</p>
+                </div>
+
+                <!-- Coordinación de Convivencia -->
+                <div class="org-box bg-green-100 border-3 border-green-500 rounded-lg p-4 text-center shadow">
+                    <h3 class="font-bold text-green-800 mb-2">COORDINACIÓN CONVIVENCIA</h3>
+                    <p class="text-xs text-green-700">Bienestar estudiantil, psicología</p>
+                </div>
+
+                <!-- Coordinación TIC -->
+                <div class="org-box bg-green-100 border-3 border-green-500 rounded-lg p-4 text-center shadow">
+                    <h3 class="font-bold text-green-800 mb-2">COORDINACIÓN TIC</h3>
+                    <p class="text-xs text-green-700">Infraestructura TIC, innovación</p>
+                </div>
+            </div>
+
+            <!-- NIVEL 3: SUBUNIDADES -->
+            <div class="level-3 grid grid-cols-5 gap-4 mb-12">
+                <!-- Bajo Secretaría Académica -->
+                <div class="space-y-2">
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Registro y Archivo</strong><br>
+                        <span class="text-blue-600">TRD, custodia documental</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Gestor SIMAT</strong><br>
+                        <span class="text-blue-600">Matrícula, novedades</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Atención Usuario</strong><br>
+                        <span class="text-blue-600">Padres, comunidad</span>
+                    </div>
+                </div>
+
+                <!-- Bajo Coordinación Académica -->
+                <div class="space-y-2">
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Jefatura Ciclos/Áreas</strong><br>
+                        <span class="text-blue-600">Primaria, Secundaria, Media</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Líder Proyecto Pedagógico</strong><br>
+                        <span class="text-blue-600">PEI, proyectos transversales</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Líder STEAM</strong><br>
+                        <span class="text-blue-600">Laboratorios, ciencias</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Líder Idiomas</strong><br>
+                        <span class="text-blue-600">Inglés, certificaciones</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Evaluación y Calidad</strong><br>
+                        <span class="text-blue-600">SIEE, seguimiento</span>
+                    </div>
+                </div>
+
+                <!-- Bajo Coordinación Administrativa -->
+                <div class="space-y-2">
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Administrador FSE</strong><br>
+                        <span class="text-blue-600">Ley 715/2001</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Auxiliar Tesorería</strong><br>
+                        <span class="text-blue-600">Contabilidad</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Compras y Contratación</strong><br>
+                        <span class="text-blue-600">Adquisiciones FSE</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Inventarios y Bienes</strong><br>
+                        <span class="text-blue-600">Hojas de vida equipos</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Planta Física</strong><br>
+                        <span class="text-blue-600">Mantenimiento</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>SST</strong><br>
+                        <span class="text-blue-600">Gestión riesgos, MECI</span>
+                    </div>
+                </div>
+
+                <!-- Bajo Coordinación Convivencia -->
+                <div class="space-y-2">
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Orientador Profesional</strong><br>
+                        <span class="text-blue-600">Atención psicopedagógica</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Docente de Apoyo</strong><br>
+                        <span class="text-blue-600">Enlace bienestar</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Comité Convivencia</strong><br>
+                        <span class="text-blue-600">Art. 63 y 66 Manual</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Escuela de Padres</strong><br>
+                        <span class="text-blue-600">Participación comunitaria</span>
+                    </div>
+                </div>
+
+                <!-- Bajo Coordinación TIC -->
+                <div class="space-y-2">
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Administrador Red</strong><br>
+                        <span class="text-blue-600">Soporte TIC</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Gestor Plataforma</strong><br>
+                        <span class="text-blue-600">CXVirtual, SIMAT</span>
+                    </div>
+                    <div class="org-box bg-blue-50 border-2 border-blue-300 rounded p-3 text-center text-xs">
+                        <strong>Formador TIC</strong><br>
+                        <span class="text-blue-600">Capacitación docente</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÓRGANOS COLEGIADOS (Lado derecho) -->
+            <div class="collegiate space-y-3 w-52">
+                <h3 class="font-bold text-center text-yellow-800 mb-4">ÓRGANOS COLEGIADOS</h3>
+                
+                <div class="org-box bg-yellow-100 border-2 border-yellow-500 rounded p-3 text-center text-xs">
+                    <strong>Consejo Directivo</strong><br>
+                    <span class="text-yellow-700">Aprobación presupuesto, PEI</span>
+                </div>
+                
+                <div class="org-box bg-yellow-100 border-2 border-yellow-500 rounded p-3 text-center text-xs">
+                    <strong>Consejo Académico</strong><br>
+                    <span class="text-yellow-700">Políticas pedagógicas</span>
+                </div>
+                
+                <div class="org-box bg-yellow-100 border-2 border-yellow-500 rounded p-3 text-center text-xs">
+                    <strong>Comité MECI</strong><br>
+                    <span class="text-yellow-700">Control interno, calidad</span>
+                </div>
+                
+                <div class="org-box bg-yellow-100 border-2 border-yellow-500 rounded p-3 text-center text-xs">
+                    <strong>Comité Contratación</strong><br>
+                    <span class="text-yellow-700">Compras, adquisiciones</span>
+                </div>
+                
+                <div class="org-box bg-yellow-100 border-2 border-yellow-500 rounded p-3 text-center text-xs">
+                    <strong>Consejo de Padres</strong><br>
+                    <span class="text-yellow-700">Participación, veeduría</span>
+                </div>
+                
+                <div class="org-box bg-yellow-100 border-2 border-yellow-500 rounded p-3 text-center text-xs">
+                    <strong>Consejo Estudiantil</strong><br>
+                    <span class="text-yellow-700">Representación estudiantil</span>
+                </div>
+            </div>
+
+            <!-- ALIADOS EXTERNOS (Parte inferior) -->
+            <div class="mt-16 pt-8 border-t-2 border-gray-300">
+                <h3 class="font-bold text-center text-purple-800 mb-4">ALIADOS EXTERNOS</h3>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="org-box bg-purple-100 border-2 border-purple-500 rounded p-4 text-center">
+                        <strong class="text-purple-800">Secretaría de Educación</strong><br>
+                        <span class="text-xs text-purple-700">Departamental/Municipal</span>
+                    </div>
+                    <div class="org-box bg-purple-100 border-2 border-purple-500 rounded p-4 text-center">
+                        <strong class="text-purple-800">SENA - Universidades</strong><br>
+                        <span class="text-xs text-purple-700">Convenios, articulación</span>
+                    </div>
+                    <div class="org-box bg-purple-100 border-2 border-purple-500 rounded p-4 text-center">
+                        <strong class="text-purple-800">Entes de Salud/Bienestar</strong><br>
+                        <span class="text-xs text-purple-700">Policía, ONG, Salud</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Funciones -->
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6 no-print">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Tabla de Funciones por Cargo</h2>
+            <div class="overflow-x-auto">
+                <table class="table table-zebra w-full">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="text-left">Cargo</th>
+                            <th class="text-left">Funciones Principales</th>
+                            <th class="text-left">Marco Normativo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold">Rector(a)</td>
+                            <td>Dirección institucional, liderazgo del PEI, presidencia de órganos colegiados</td>
+                            <td>Decreto 1075/2015</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Secretaría Académica</td>
+                            <td>Registro académico, gestión SIMAT, archivo y expedientes</td>
+                            <td>Resolución 5360/2006</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Coordinación Académica</td>
+                            <td>Dirección pedagógica, currículo, evaluación SIEE, planes de mejoramiento</td>
+                            <td>Decreto 1075/2015</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Coordinación Administrativa</td>
+                            <td>Gestión FSE, compras, inventarios, mantenimiento e infraestructura</td>
+                            <td>Ley 715/2001</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Coordinación Convivencia</td>
+                            <td>Convivencia escolar, psicología, mediación y bienestar estudiantil</td>
+                            <td>Ley 1620/2013</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Coordinación TIC</td>
+                            <td>Infraestructura TIC, soporte, plataformas y formación docente</td>
+                            <td>Plan Nacional TIC</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Administrador FSE</td>
+                            <td>Gestión presupuestal, reportes financieros y conciliaciones</td>
+                            <td>Ley 715/2001</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Responsable SST</td>
+                            <td>Matriz de riesgos, planes de emergencia y SG-SST</td>
+                            <td>MECI/MIPG</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Consejo Directivo</td>
+                            <td>Aprobación de presupuesto, cupos, políticas institucionales</td>
+                            <td>Decreto 1075/2015</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Comité MECI</td>
+                            <td>Seguimiento control interno, auditoría interna y mejora continua</td>
+                            <td>MECI/MIPG</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Marco Normativo -->
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6 no-print">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Marco Normativo de Referencia</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="space-y-3">
+                    <div class="p-4 bg-blue-50 rounded-lg">
+                        <h4 class="font-bold text-blue-800">Decreto 1075 de 2015</h4>
+                        <p class="text-sm text-blue-700">Contenido mínimo del PEI y criterios de organización administrativa</p>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <h4 class="font-bold text-green-800">Resolución 5360 de 2006</h4>
+                        <p class="text-sm text-green-700">Organización del proceso de matrícula oficial (SIMAT)</p>
+                    </div>
+                    <div class="p-4 bg-yellow-50 rounded-lg">
+                        <h4 class="font-bold text-yellow-800">Ley 715 de 2001</h4>
+                        <p class="text-sm text-yellow-700">Fondos de Servicios Educativos (FSE) y marco presupuestal</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="p-4 bg-purple-50 rounded-lg">
+                        <h4 class="font-bold text-purple-800">Decreto 1850 de 2002</h4>
+                        <p class="text-sm text-purple-700">Asignación académica 22 horas por docente</p>
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-lg">
+                        <h4 class="font-bold text-red-800">MECI/MIPG</h4>
+                        <p class="text-sm text-red-700">Control interno, comités, auditoría interna, gestión de riesgos</p>
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-lg">
+                        <h4 class="font-bold text-indigo-800">Ley 1620 de 2013</h4>
+                        <p class="text-sm text-indigo-700">Sistema Nacional de Convivencia Escolar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center text-gray-600 text-sm no-print">
+            <p>Organigrama Institucional Educativo - Generado según normativa MEN</p>
+            <p>Actualizado: <span id="currentDate"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar fecha actual
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES');
+
+        // Función para cambiar vista
+        function toggleView(viewType) {
+            const orgContainer = document.querySelector('.org-container');
+            if (viewType === 'hierarchical') {
+                orgContainer.style.transform = 'scale(1)';
+                orgContainer.style.transformOrigin = 'top center';
+            } else if (viewType === 'functional') {
+                orgContainer.style.transform = 'scale(0.8)';
+                orgContainer.style.transformOrigin = 'top center';
+            }
+        }
+
+        // Efectos interactivos
+        document.querySelectorAll('.org-box').forEach(box => {
+            box.addEventListener('click', function() {
+                // Resaltar conexiones relacionadas
+                this.style.borderWidth = '4px';
+                setTimeout(() => {
+                    this.style.borderWidth = '';
+                }, 1000);
+            });
+        });
+
+        // Función para exportar como imagen (simulada)
+        function exportAsImage() {
+            alert('Para exportar como imagen, use la función de impresión del navegador y seleccione "Guardar como PDF" o use una herramienta de captura de pantalla.');
+        }
+    </script>
+</body>
+</html>
